@@ -1,0 +1,21 @@
+flask_client
+195.130.73.237
+gl0b3on!2024
+
+<VirtualHost *:80>
+    ServerName 195.130.73.232
+    DocumentRoot /var/www/scoring-api
+
+    WSGIDaemonProcess app user=www-data group=www-data threads=5 python-home=~/miniconda3/envs/globenv
+    WSGIScriptAlias / /var/www/scoring-api/scoring-api.wsgi
+
+    ErrorLog ${APACHE_LOG_DIR}/scoring-api.log
+    CustomLog ${APACHE_LOG_DIR}/scoring-api.log combined
+
+    <Directory /var/www/scoring-api>
+    WSGIProcessGroup app
+    WSGIApplicationGroup %{GLOBAL}
+    Order deny,allow
+    Require all granted
+</Directory>
+</VirtualHost>
